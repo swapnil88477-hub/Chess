@@ -1,0 +1,8 @@
+# Project Requirements
+- Node.js >= 18.0.0
+- Modern Web Browser (Chrome/Edge/Firefox)
+- Local Server required for camera access (e.g., VS Code Live Server)
+
+# Dependencies
+- chess.js: ^0.10.3
+- @mediapipe/tasks-vision: ^0.10.14

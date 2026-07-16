@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Chess — Hand Gesture Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <style>
+        /* Ensures the dropdowns look good within the glass cards */
+        .settings-label { display: block; text-align: left; margin: 10px 0 5px 0; font-size: 0.85rem; font-weight: 600; color: #fff; }
+        select { width: 100%; padding: 12px; border-radius: 8px; background: rgba(0, 0, 0, 0.3); color: white; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; }
+        select option { background: #1a1a1a; color: white; }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <video id="webcam" autoplay playsinline muted></video>
+        <canvas id="hand-canvas"></canvas>
+
+        <div id="game-container" class="hidden">
+            <div class="sidebar glass">
+                <div class="logo">👑 Cyber<span>Chess</span></div>
+                <div class="turn-indicator" id="turn-box">White's Turn</div>
+                <div class="move-log" id="move-log">
+                    <div class="log-title">Match History</div>
+                    <div id="log-entries"></div>
+                </div>
+                <div class="action-panel">
+                    <button id="pause-btn" class="btn-secondary danger gesture-target">Pause Game <span
+                            class="progress-bar"></span></button>
+                </div>
+            </div>
+
+            <div class="board-wrapper">
+                <div id="chess-board"></div>
+            </div>
+        </div>
+
+        <div id="start-screen" class="overlay">
+            <div class="card glass">
+                <div class="hero-emoji">👑✋ ♟️</div>
+                <h1>Cyber<span>Chess</span></h1>
+                <p class="tagline">Control the battlefield with your hands!</p>
+                
+                <ul class="features">
+                    <li>👋 Hover your index finger over a piece to select it</li>
+                    <li>🎯 Hover over a valid highlighted square to complete the move</li>
+                    <li>⏸️ Use the pause button on the left to halt the match</li>
+                </ul>
+
+                <label class="settings-label">Game Mode</label>
+                <select id="mode-select">
+                    <option value="pvp">Human vs Human</option>
+                    <option value="pvc">Human vs Computer</option>
+                </select>
+                
+                <label class="settings-label">AI Difficulty</label>
+                <select id="diff-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <button id="start-btn" class="btn-primary" style="margin-top: 20px;">
+                    <span>Boot Chess Engine</span>
+                    <small>Webcam authorization required</small>
+                </button>
+            </div>
+        </div>
+
+        <div id="pause-screen" class="overlay hidden">
+            <div class="card glass">
+                <div class="hero-emoji">⏸️</div>
+                <h2>Match Interrupted</h2>
+                <p class="tagline">Hover your cursor over your choice to proceed</p>
+                <div class="menu-actions">
+                    <button id="resume-btn" class="btn-primary gesture-target">Resume Match <span class="progress-bar"></span></button>
+                    <button id="restart-btn" class="btn-secondary gesture-target">Reset Board <span class="progress-bar"></span></button>
+                    <button id="exit-btn" class="btn-secondary danger gesture-target">Main Menu <span class="progress-bar"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over" class="overlay hidden">
+            <div class="card glass">
+                <div class="hero-emoji">🏆</div>
+                <h2 id="win-status">Checkmate</h2>
+                <p id="win-details" class="tagline">White won the match.</p>
+                <div class="menu-actions">
+                    <button id="gameover-restart-btn" class="btn-primary gesture-target">New Game <span class="progress-bar"></span></button>
+                    <button id="gameover-exit-btn" class="btn-secondary danger gesture-target">Exit Menu <span class="progress-bar"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="overlay hidden">
+            <div class="card glass loading-card">
+                <div class="spinner"></div>
+                <p>Configuring MediaPipe Hand Tracking Models...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>
