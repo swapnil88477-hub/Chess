@@ -1,0 +1,12 @@
+{
+  "name": "cyber-chess",
+  "version": "1.0.0",
+  "description": "Futuristic Chess with Hand Gesture Control",
+  "main": "index.html",
+  "author": "Swapnil Mane",
+  "license": "MIT",
+  "dependencies": {
+    "chess.js": "^0.10.3",
+    "@mediapipe/tasks-vision": "^0.10.14"
+  }
+}
